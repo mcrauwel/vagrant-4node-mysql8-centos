@@ -28,14 +28,16 @@ Vagrant.configure("2") do |config|
       end
       node.vm.network "private_network", ip: "#{IP_BLOCK}#{100+machine_id}"
       node.vm.hostname = "node#{machine_id}"
-    
+
       node.vm.provision "shell", inline: <<-SHELL
+        echo "127.0.0.1 localhost" > /etc/hosts
+        echo "::1 localhost" >> /etc/hosts
         for i in {1..#{NUM_VMS}}
         do
           let z=100+$i
           echo "#{IP_BLOCK}$z node$i" >> /etc/hosts
         done
-        yum localinstall -y -q https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm  
+        yum localinstall -y -q https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
 	yum localinstall -y -q http://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm
       SHELL
     end
