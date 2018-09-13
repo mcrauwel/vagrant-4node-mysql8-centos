@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
           echo "#{IP_BLOCK}$z node$i" >> /etc/hosts
         done
         yum localinstall -y -q https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
-	yum localinstall -y -q http://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm
+        yum localinstall -y -q http://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm
       SHELL
     end
   end
